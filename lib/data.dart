@@ -1,3 +1,5 @@
+import 'package:clock_app/color.dart';
+import 'package:clock_app/model/alarm_info.dart';
 import 'package:clock_app/model/menu_info.dart';
 import 'package:clock_app/screens/enum.dart';
 
@@ -8,3 +10,7 @@ List<MenuInfo> menuItems = [
   MenuInfo(MenuType.stopwatch, title: 'Stopwatch', imageSource: 'assets/stopwatch_icon.png'),
 ];
 
+List<AlarmInfo> alarms = [
+  AlarmInfo(alarmDateTime: DateTime.now().add(Duration(hours: 1)), title: 'Office', gradientColorIndex: 0),
+  AlarmInfo(alarmDateTime: DateTime.now().add(Duration(hours: 2)), title: 'Sport', gradientColorIndex: 1),
+];

@@ -1,6 +1,9 @@
-import 'dart:async';
+// ignore_for_file: prefer_const_constructors
 
-import 'package:clock_app/view/clock_view.dart';
+import 'dart:async';
+import 'dart:developer';
+
+import 'package:clock_app/screens/clock_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -17,7 +20,7 @@ class _ClockPageState extends State<ClockPage> {
   @override
   Widget build(BuildContext context) {
     var now = DateTime.now();
-     var formattedDate = DateFormat('EEE, d MMM').format(now);
+    var formattedDate = DateFormat('EEE, d MMM').format(now);
     var timezoneString = now.timeZoneOffset.toString().split('.').first;
     var offsetSign = '';
     if (!timezoneString.startsWith('-')) offsetSign = '+';
@@ -111,26 +114,28 @@ class DigitalClockWidgetState extends State<DigitalClockWidget> {
 
   @override
   void initState() {
-    this.timer = Timer.periodic(Duration(seconds: 1), (timer) {
+    timer = Timer.periodic(Duration(seconds: 1), (timer) {
+    //updated time after every  one minute
       var perviousMinute = DateTime.now().add(Duration(seconds: -1)).minute;
       var currentMinute = DateTime.now().minute;
-      if (perviousMinute != currentMinute)
+      if (perviousMinute != currentMinute) {
         setState(() {
           formattedTime = DateFormat('HH:mm').format(DateTime.now());
         });
+      }
     });
     super.initState();
   }
 
   @override
   void dispose() {
-    this.timer.cancel();
+    timer.cancel();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    print('=====>digital clock updated');
+    log('=====>digital clock updated');
     return Text(
       formattedTime,
       style: TextStyle(fontFamily: 'avenir', color: Colors.white, fontSize: 64),
